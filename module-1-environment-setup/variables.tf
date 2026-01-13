@@ -22,18 +22,6 @@ variable "retention_days" {
   default     = 30
 }
 
-variable "sentinel_solution_name" {
-  description = "Name of the Sentinel solution"
-  type        = string
-  default     = "SecurityInsights"
-}
-
-variable "enable_data_connectors" {
-  description = "Enable sample data connectors for training"
-  type        = bool
-  default     = true
-}
-
 variable "tags" {
   description = "Tags to apply to all resources"
   type        = map(string)

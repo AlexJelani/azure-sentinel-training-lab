@@ -33,31 +33,11 @@ resource "azurerm_sentinel_log_analytics_workspace_onboarding" "training_sentine
   workspace_id = azurerm_log_analytics_workspace.training_workspace.id
 }
 
-# Deploy Training Lab solution template
-resource "azurerm_resource_group_template_deployment" "training_lab_solution" {
-  name                = "sentinel-training-lab-solution"
-  resource_group_name = azurerm_resource_group.sentinel_training.name
-  deployment_mode     = "Incremental"
-  
-  template_content = file("${path.module}/training-lab-template.json")
-  
-  parameters_content = jsonencode({
-    workspace-name = {
-      value = azurerm_log_analytics_workspace.training_workspace.name
-    }
-    workspace-id = {
-      value = azurerm_log_analytics_workspace.training_workspace.id
-    }
-  })
-  
-  depends_on = [azurerm_sentinel_log_analytics_workspace_onboarding.training_sentinel]
-}
-
 # API Connection for playbook
 resource "azurerm_api_connection" "sentinel_connection" {
   name                = "azuresentinel-Get-GeoFromIpAndTagIncident"
   resource_group_name = azurerm_resource_group.sentinel_training.name
-  managed_api_id      = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Web/locations/${var.location}/managedApis/azuresentinel"
+  managed_api_id      = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/providers/Microsoft.Web/locations/eastus/managedApis/azuresentinel"
   display_name        = "Azure Sentinel Connection"
   tags                = var.tags
 }
