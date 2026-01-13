@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspace-name": {
+      "type": "string"
+    },
+    "workspace-id": {
+      "type": "string"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces/providers/contentPackages",
+      "apiVersion": "2023-04-01-preview",
+      "location": "[resourceGroup().location]",
+      "name": "[concat(parameters('workspace-name'), '/Microsoft.SecurityInsights/TrainingLabSolution')]",
+      "properties": {
+        "contentId": "azuresentinel.azure-sentinel-solution-training-lab",
+        "contentKind": "Solution",
+        "displayName": "Training Lab Solution",
+        "source": {
+          "kind": "Solution",
+          "name": "Training Lab Solution",
+          "sourceId": "azuresentinel.azure-sentinel-solution-training-lab"
+        },
+        "version": "3.0.0"
+      }
+    }
+  ]
+}
