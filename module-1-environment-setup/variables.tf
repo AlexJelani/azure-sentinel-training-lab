@@ -28,18 +28,6 @@ variable "sentinel_solution_name" {
   default     = "SecurityInsights"
 }
 
-variable "vm_admin_username" {
-  description = "Admin username for training VMs"
-  type        = string
-  default     = "azureuser"
-}
-
-variable "vm_admin_password" {
-  description = "Admin password for training VMs"
-  type        = string
-  sensitive   = true
-}
-
 variable "enable_data_connectors" {
   description = "Enable sample data connectors for training"
   type        = bool
